@@ -6,7 +6,6 @@ const Button = styled.button`
     padding: 0.5rem 2rem;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 20px;
 `;
 
 function PrimaryButton({ children, onClick }) {

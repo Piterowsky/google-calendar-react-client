@@ -5,30 +5,28 @@ import LoadingComponent from './LoadingComponent';
 const GoogleApiContext = createContext({});
 
 class GoogleApi extends React.Component {
+    GOOGLE_USER_KEY = 'googleUser';
+
     state = {
         gapi: null,
         googleAuth: null,
         googleUser: null,
         isScriptLoaded: false,
-        spinner: {
-            isLoadingTimeoutEnded: false,
-            loadingTimeout: 1000,
-        },
     };
 
     componentDidMount() {
-        const script = this.loadGoogleApisScript();
+        this.onGoogleScriptLoadListener();
+    }
+
+    onGoogleScriptLoadListener() {
+        const script = this.createGoogleScriptElement();
         script.addEventListener('load', () => {
             this.setState({ isScriptLoaded: true, gapi: window.gapi });
             this.init();
         });
-        setTimeout(
-            () => this.setState({ spinner: { isLoadingTimeoutReached: true } }),
-            this.state.spinner.loadingTimeout
-        );
     }
 
-    loadGoogleApisScript() {
+    createGoogleScriptElement() {
         const script = document.createElement('script');
         script.src = urls.google.apisGoogleScript;
         document.head.appendChild(script);
@@ -43,31 +41,35 @@ class GoogleApi extends React.Component {
                 });
                 this.setState({ googleAuth });
             } catch (e) {
-                throw new Error('Cannot load google apis script');
+                throw new Error(`Cannot load google apis script: ${e}`);
             }
         });
     }
 
     isSignedIn = () => {
-        return this.state.googleAuth.isSignedIn.get();
+        return this.state.googleAuth.isSignedIn().get();
     };
 
     signIn = async () => {
         const googleUser = await this.state.googleAuth.signIn();
-        console.log('signIn');
+        this.setGoogleUser(googleUser);
         this.setState({ googleUser });
     };
 
+    logOut = async () => {
+        this.setState({ googleUser: null });
+        localStorage.removeItem(this.GOOGLE_USER_KEY);
+    };
+
     getAuthHeaders = async () => {
-        if (this.state.googleUser === null) {
+        if (!this.isSignedIn()) {
             await this.signIn();
         }
 
-        const tokenType = this.state.googleUser.wc.token_type;
-        const token = this.state.googleUser.wc.access_token;
+        const { token_type, access_token } = this.getGoogleUser().wc;
 
         return {
-            Authorization: `${tokenType} ${token}`,
+            Authorization: `${token_type} ${access_token}`,
         };
     };
 
@@ -81,15 +83,29 @@ class GoogleApi extends React.Component {
         return json.items;
     };
 
-    render() {
-        const displayChildren = this.state.isScriptLoaded && this.state.spinner.isLoadingTimeoutReached;
-        const children = this.props.children;
-        const context = {
+    combineContext() {
+        return {
             ...this.state,
             isSignedIn: this.isSignedIn,
             getCalendarsList: this.getCalendarsList,
             signIn: this.signIn,
+            logOut: this.logOut,
         };
+    }
+
+    getGoogleUser() {
+        return JSON.parse(localStorage.getItem(this.GOOGLE_USER_KEY));
+    }
+
+    setGoogleUser(googleUser) {
+        localStorage.setItem(this.GOOGLE_USER_KEY, JSON.stringify(googleUser));
+    }
+
+    render() {
+        const displayChildren = this.state.isScriptLoaded;
+        const children = this.props.children;
+        const context = this.combineContext();
+
         return (
             <GoogleApiContext.Provider value={context}>
                 {displayChildren ? children : <LoadingComponent />}
