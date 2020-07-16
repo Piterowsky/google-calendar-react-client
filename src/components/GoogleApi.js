@@ -93,14 +93,15 @@ class GoogleApi extends React.Component {
         return auth && auth.isSignedIn.get();
     };
 
-    signIn = () => {
+    signIn = async () => {
         const { auth } = this.state.api;
-        auth.signIn();
+        await auth.signIn();
     };
 
-    logOut = () => {
+    logOut = async () => {
         const { auth } = this.state.api;
-        auth.signOut();
+        await auth.signOut();
+        console.log(auth.isSignedIn.get());
         this.updateSignInStatus(auth.isSignedIn.get());
     };
 
