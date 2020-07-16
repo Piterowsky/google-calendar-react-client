@@ -27,8 +27,8 @@ const rotate = keyframes`
 `;
 
 const Spinner = styled('div')`
-    width: 5vw;
-    height: 5vw;
+    width: 10vmin;
+    height: 10vmin;
     background: ${colors.primaryLight};
     position: absolute;
     top: 50%;

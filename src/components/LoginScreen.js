@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { GoogleApiContext } from './GoogleApi';
-import { PrimaryButton } from './Buttons';
+import { PrimaryButton } from './uni/Buttons';
 import styled from 'styled-components';
 
 const Container = styled.div`

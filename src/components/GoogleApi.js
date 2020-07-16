@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import urls from '../utils/urls';
 import { cloneDeep } from 'lodash';
+import LoadingComponent from "./LoadingComponent";
 
 const GoogleApiContext = createContext({});
 
@@ -14,7 +15,9 @@ class GoogleApi extends React.Component {
         },
         api: {
             gapi: null,
-            isSignedIn: false,
+            auth: null,
+            user: null,
+            isSignedIn: false
         },
     };
 
@@ -43,70 +46,95 @@ class GoogleApi extends React.Component {
         const script = document.createElement('script');
         script.src = urls.google.apisGoogleScript;
         document.head.appendChild(script);
-        script.addEventListener('load', () => {
-            const api = Object.assign({}, { ...this.state.api, gapi: window.gapi });
-            this.setState({ isScriptLoaded: true, api });
-
-            api.gapi.load('client:auth2', this.init);
-        });
+        script.addEventListener('load', this.onScriptLoadHandler);
         return script;
     }
 
-    updateSignInStatus = (isSignedIn) => {
-        console.log(isSignedIn);
+    onScriptLoadHandler = () => {
         const api = cloneDeep(this.state.api);
-        api.isSignedIn = isSignedIn;
-        this.setState({ api });
+        api.gapi = window.gapi;
+        api.gapi.load('auth2', this.init);
+        this.setState({ isScriptLoaded: true, api });
     };
 
-    init = () => {
-        const { gapi } = this.state.api;
-        gapi.client
-            .init({
-                apiKey: process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY,
-                clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                scope: 'https://www.googleapis.com/auth/calendar.readonly',
-            })
-            .then(() => {
-                gapi.auth2.getAuthInstance().isSignedIn.listen(isSignedIn => this.updateSignInStatus(isSignedIn));
-                this.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    init = async () => {
+        try {
+            const { gapi } = this.state.api;
 
-                return true;
-            })
-            .catch((e) => console.error(e));
+            const auth = await gapi.auth2.init({
+                clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            });
+
+            auth.isSignedIn.listen((isSignedIn) => this.updateSignInStatus(isSignedIn));
+            this.updateSignInStatus(auth.isSignedIn.get());
+
+            this.setState({ api: { ...this.state.api, auth } });
+        } catch (e) {
+            throw new Error(`Cannot connect with google calendar API. ${e}`);
+        }
+    };
+
+    async getAuthInstance() {
+        const { gapi } = this.state.api;
+        return await gapi.auth2.getAuthInstance();
+    }
+
+    async getCurrentUser() {
+        const authInstance = await this.getAuthInstance();
+        return authInstance.currentUser.get()
+    }
+
+    updateSignInStatus = (isSignedIn) => {
+        this.setState({ api: { ...this.state.api, isSignedIn } });
     };
 
     isSignedIn = () => {
-        const {gapi} = this.state.api;
-
-        if (gapi != null && gapi.auth2 != null) {
-            return gapi.auth2.getAuthInstance().isSignedIn.get();
-        }
-        return false;
+        const auth = this.state.api.auth;
+        return auth && auth.isSignedIn.get();
     };
 
     signIn = () => {
-        const { gapi } = this.state.api;
-        gapi.auth2.getAuthInstance().signIn();
+        const { auth } = this.state.api;
+        auth.signIn();
     };
 
     logOut = () => {
-        const { gapi } = this.state.api;
-        gapi.auth2.getAuthInstance().signOut();
+        const { auth } = this.state.api;
+        auth.signOut();
+        this.updateSignInStatus(auth.isSignedIn.get());
+    };
+
+    async getToken() {
+        const user = await this.getCurrentUser();
+        const { token_type, access_token } = user.wc;
+        return [token_type, access_token];
+    }
+
+    getCalendarsList = async () => {
+        const [tokenType, token] = await this.getToken();
+        const response = await fetch(urls.google.getCalendars, {
+            headers: {
+                'Authorization': `${tokenType} ${token}`
+            }
+        });
+        const json = await response.json();
+        return json.items;
     };
 
     render() {
         const displayChildren = this.state.isScriptLoaded && this.state.animation.executed;
         const children = this.props.children;
-        const context = null;
+        const context = {
+            logout: this.logOut,
+            isSignedIn: this.isSignedIn,
+            getCalendars: this.getCalendarsList,
+            signIn: this.signIn
+        };
 
         return (
-            <button onClick={this.isSignedIn() ? this.logOut : this.signIn}>
-                {this.state.api.isSignedIn.toString()}
-            </button>
-            /*<GoogleApiContext.Provider value={context}>
+            <GoogleApiContext.Provider value={context}>
                 {displayChildren ? children : <LoadingComponent duration={this.state.animation.duration} />}
-            </GoogleApiContext.Provider>*/
+            </GoogleApiContext.Provider>
         );
     }
 }

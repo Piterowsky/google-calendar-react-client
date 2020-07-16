@@ -8,10 +8,9 @@ import App from "./components/App";
 ReactDOM.render(
     <React.StrictMode>
         <GoogleApiProvider>
-            hello
-            {/*<Router>
+            <Router>
                 <App />
-            </Router>*/}
+            </Router>
         </GoogleApiProvider>
     </React.StrictMode>,
     document.getElementById('root')

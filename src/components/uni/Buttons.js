@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import colors from '../utils/colors';
+import colors from '../../utils/colors';
 
 const Button = styled.button`
     padding: 0.5rem 2rem;
@@ -10,7 +10,7 @@ const Button = styled.button`
 
 function PrimaryButton({ children, onClick }) {
     const PrimaryButton = styled(Button)`
-        background: ${colors.primary};
+        background: ${colors.primaryLight};
         border: 2px solid ${colors.primaryIntensive};
         color: white;
 
