@@ -14,7 +14,7 @@ const Container = styled.div`
 function LoginScreen() {
     const context = useContext(GoogleApiContext);
 
-    const handleLogin = () => context.signIn()
+    const handleLogin = () => context.signIn();
     return (
         <Container>
             <h1>Calendar Web Client</h1>
