@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getDaysOfMonth } from '../../utils/date';
 import MonthView from './MonthView';
+import styled from 'styled-components';
 
 function CurrentCalendar() {
     return <CalendarView />;
@@ -24,10 +25,22 @@ class CalendarView extends React.Component {
 
     render() {
         const current = this.state.current;
-        const daysOfMonth = getDaysOfMonth(current.year, current.month);
 
-        return <MonthView days={daysOfMonth} />;
+        return (
+            <Container>
+                <MonthView date={this.state.current} />
+                <Details/>
+            </Container>
+        );
     }
 }
+
+const Container = styled.div`
+
+`;
+
+const Details = styled.div`
+  height: calc(50vh - 40px);
+`;
 
 export default CurrentCalendar;

@@ -5,7 +5,8 @@ import LinksContainer from './LinksContainer';
 import LogoContainer from './LogoContainer';
 
 const StyledNav = styled.nav`
-    height: 80px;
+    height: 5vh;
+    max-height: 80px;
     background: ${colors.primary};
     display: flex;
     align-items: center;

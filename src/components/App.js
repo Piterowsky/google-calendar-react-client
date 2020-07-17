@@ -5,14 +5,15 @@ import Nav from './nav/Nav';
 import { Route } from 'react-router-dom';
 import CalendarsList from './calendar/CalendarsList';
 import CurrentCalendar from './calendar/CurrentCalendar';
+import styled from 'styled-components';
 
 function App() {
     const context = useContext(GoogleApiContext);
     return context.isSignedIn() ? (
         <div className="App">
-            <header>
+            <Header>
                 <Nav />
-            </header>
+            </Header>
             <main>
                 <Route component={CurrentCalendar} exact path="/" />
                 <Route component={CalendarsList} exact path="/calendars" />
@@ -22,5 +23,9 @@ function App() {
         <LoginScreen />
     );
 }
+
+const Header = styled.header`
+  margin-bottom: 1.5vh;
+`;
 
 export default App;

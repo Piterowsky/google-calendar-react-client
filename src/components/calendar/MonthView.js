@@ -1,10 +1,13 @@
-import { getDaysOfTheWeekLocalized } from '../../utils/date';
+import { getDaysOfMonth, getDaysOfTheWeekLocalized } from '../../utils/date';
 import styled from 'styled-components';
 import colors from '../../utils/colors';
 import React from 'react';
+import device from '../../utils/media';
 
-function MonthView({ days }) {
-    const daysOfMonth = [...Array(days).keys()].map((day) => day + 1);
+function MonthView({ date }) {
+    const offset = new Date(date.year, date.month, date.)
+    const daysNumber = getDaysOfMonth(date.year, date.month);
+    const daysOfMonth = [...Array(daysNumber).keys()].map((day) => day + 1);
 
     const daysOfTheWeek = getDaysOfTheWeekLocalized().map((day) => (
         <WeekDayLabel key={day}>
@@ -31,7 +34,7 @@ const MonthViewContainer = styled.div`
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr repeat(5, 5fr);
     grid-gap: 0.15vmin;
-    height: calc(100vh - 80px);
+    height: calc(50vh - 40px);
 `;
 
 const MonthViewDayTile = styled.div`
@@ -48,8 +51,11 @@ const MonthViewDayTile = styled.div`
         left: 50%;
         color: ${colors.lightgray};
         transform: translate(-50%, -50%);
-        filter: blur(1px);
         user-select: none;
+    }
+
+    @media ${device.laptop} {
+        filter: blur(1px);
     }
 `;
 
