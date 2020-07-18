@@ -7,7 +7,7 @@ function CalendarsList() {
 
     useEffect(() => {
         context
-            .getCalendars()
+            .getCalendarsList()
             .then((data) => setCalendars(data.map((calendar) => calendar.summary)))
             .catch((e) => {
                 throw new Error(`Cannot get list of calendars, ${e}`);

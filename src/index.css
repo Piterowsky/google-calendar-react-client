@@ -19,3 +19,13 @@ body {
     font-size: 2vmin;
 }
 
+button {
+    padding: 0;
+}
+
+input,
+select,
+textarea,
+button {
+    font-size: inherit;
+}

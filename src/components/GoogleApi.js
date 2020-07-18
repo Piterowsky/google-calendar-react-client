@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 import urls from '../utils/urls';
 import { cloneDeep } from 'lodash';
-import LoadingComponent from "./LoadingComponent";
+import LoadingComponent from './LoadingComponent';
 
 const GoogleApiContext = createContext({});
 
@@ -17,7 +17,7 @@ class GoogleApi extends React.Component {
             gapi: null,
             auth: null,
             user: null,
-            isSignedIn: false
+            isSignedIn: false,
         },
     };
 
@@ -53,7 +53,7 @@ class GoogleApi extends React.Component {
     onScriptLoadHandler = () => {
         const api = cloneDeep(this.state.api);
         api.gapi = window.gapi;
-        api.gapi.load('auth2', this.init);
+        api.gapi.load('client:auth2', this.init);
         this.setState({ isScriptLoaded: true, api });
     };
 
@@ -63,6 +63,8 @@ class GoogleApi extends React.Component {
 
             const auth = await gapi.auth2.init({
                 clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+                apiKey: process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY,
+                scope: 'https://www.googleapis.com/auth/calendar',
             });
 
             auth.isSignedIn.listen((isSignedIn) => this.updateSignInStatus(isSignedIn));
@@ -81,7 +83,7 @@ class GoogleApi extends React.Component {
 
     async getCurrentUser() {
         const authInstance = await this.getAuthInstance();
-        return authInstance.currentUser.get()
+        return authInstance.currentUser.get();
     }
 
     updateSignInStatus = (isSignedIn) => {
@@ -115,8 +117,8 @@ class GoogleApi extends React.Component {
         const [tokenType, token] = await this.getToken();
         const response = await fetch(urls.google.getCalendars, {
             headers: {
-                'Authorization': `${tokenType} ${token}`
-            }
+                Authorization: `${tokenType} ${token}`,
+            },
         });
         const json = await response.json();
         return json.items;
@@ -128,8 +130,8 @@ class GoogleApi extends React.Component {
         const context = {
             logout: this.logOut,
             isSignedIn: this.isSignedIn,
-            getCalendars: this.getCalendarsList,
-            signIn: this.signIn
+            getCalendarsList: this.getCalendarsList,
+            signIn: this.signIn,
         };
 
         return (

@@ -10,22 +10,30 @@ import styled from 'styled-components';
 function App() {
     const context = useContext(GoogleApiContext);
     return context.isSignedIn() ? (
-        <div className="App">
+        <AppContainer className="App">
             <Header>
                 <Nav />
             </Header>
-            <main>
+            <MainContainer>
                 <Route component={CurrentCalendar} exact path="/" />
                 <Route component={CalendarsList} exact path="/calendars" />
-            </main>
-        </div>
+            </MainContainer>
+        </AppContainer>
     ) : (
         <LoginScreen />
     );
 }
 
 const Header = styled.header`
-  margin-bottom: 1.5vh;
+    margin-bottom: 1.5vh;
+`;
+
+const MainContainer = styled.main`
+    padding: 0 1rem;
+`;
+
+const AppContainer = styled.div`
+    overflow: hidden;
 `;
 
 export default App;

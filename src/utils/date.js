@@ -1,11 +1,13 @@
-import React from "react";
+function getCurrentMonthLength(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+}
 
-function getDaysOfMonth(year, month) {
-    return new Date(year, month, 0).getDate();
+function getCurrentMonthOffset(year, month) {
+    return new Date(year, month, 1).getDay();
 }
 
 function getDaysOfTheWeekLocalized() {
-    return ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 }
 
-export { getDaysOfMonth, getDaysOfTheWeekLocalized };
+export { getCurrentMonthLength, getDaysOfTheWeekLocalized, getCurrentMonthOffset };

@@ -3,23 +3,53 @@ import styled from 'styled-components';
 import colors from '../../utils/colors';
 
 const Button = styled.button`
-    padding: 0.5rem 2rem;
-    border-radius: 5px;
     cursor: pointer;
 `;
 
-function PrimaryButton({ children, onClick }) {
-    const PrimaryButton = styled(Button)`
-        background: ${colors.primaryLight};
-        border: 2px solid ${colors.primaryIntensive};
-        color: white;
+function PrimaryButton({ children, onClick}) {
 
+    const PrimaryButton = styled(Button)`
+        background: transparent;
+        border-radius: 5px;
+        border: 0.5vmin solid transparent;
+        color: white;
+        font-weight: bold;
+        padding: 0.5vmin;
+        transition: border .6s;
+
+        & > div {
+            padding: 1.5vmin 3.5vmin;
+            height: 100%;
+            width: 100%;
+            background: ${colors.primaryLight};
+        }
+        
         &:active {
-            background: ${colors.primaryIntensive};
+          background: ${colors.primaryLight};
+        }
+        
+        &:hover {
+          border-color: ${colors.primaryIntensive};
         }
     `;
 
-    return <PrimaryButton onClick={onClick}>{children}</PrimaryButton>;
+    return (
+        <PrimaryButton onClick={onClick}>
+            <div>{children}</div>
+        </PrimaryButton>
+    );
 }
 
-export { PrimaryButton };
+function LogoutButton({ children, onClick }) {
+    const LogoutButton = styled(Button)`
+
+    `;
+
+    return (
+        <LogoutButton onClick={onClick}>
+            <div>{children}</div>
+        </LogoutButton>
+    );
+}
+
+export { PrimaryButton, LogoutButton };
