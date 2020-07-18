@@ -22,8 +22,14 @@ class CalendarView extends React.Component {
         },
     };
 
-    setCurrentDay = (day) => {
-        this.setState({ current: { ...this.state.current, day } });
+    setCurrentDay = (year, month, day) => {
+        const current = {
+            year,
+            month,
+            day,
+        };
+        console.log(current);
+        this.setState({ current });
     };
 
     render() {
