@@ -16,7 +16,7 @@ body {
 }
 
 :root {
-    font-size: 2vmin;
+    font-size: calc(2vmin + 0.1rem);
 }
 
 button {

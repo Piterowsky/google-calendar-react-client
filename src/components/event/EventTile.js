@@ -7,7 +7,6 @@ function Event({ event }) {
 
     const startDate = parseDate(event.start.dateTime);
     const endDate = parseDate(event.end.dateTime);
-    console.log(event);
     return (
         <StyledEvent>
             <ColorBar color={color} />
