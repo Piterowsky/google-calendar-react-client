@@ -143,10 +143,10 @@ class GoogleApi extends React.Component {
         const displayChildren = this.state.isScriptLoaded && this.state.animation.executed;
         const children = this.props.children;
         const context = {
-            logout: this.logOut,
+            logOut: this.logOut,
+            signIn: this.signIn,
             isSignedIn: this.isSignedIn,
             getCalendarsList: this.getCalendarsList,
-            signIn: this.signIn,
             getEvents: this.getEvents
         };
 
