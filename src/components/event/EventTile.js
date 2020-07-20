@@ -66,7 +66,7 @@ const ColorBar = styled.div`
 
 const StyledEvent = styled.div`
     background: #eeeeee;
-    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.25);
     margin-top: 2.5vmin;
     min-height: 10vh;
     color: black;
