@@ -12,8 +12,8 @@ function LoadingComponent({ duration }) {
 
 const Container = styled.div`
     position: absolute;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 `;
 
 const rotate = keyframes`
@@ -34,7 +34,7 @@ const Spinner = styled('div')`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: ${rotate} ${({ duration }) => duration}ms infinite;
+    animation: ${rotate} ${({ duration }) => duration ? duration : 1000}ms infinite;
 `;
 
 export default LoadingComponent;

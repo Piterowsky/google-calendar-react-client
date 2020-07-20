@@ -8,4 +8,5 @@ export default {
     primaryIntensive: '#c64833',
     lightgray: '#CCCCCC',
     white: '#FFFFFF',
+    darkgray: '#222222',
 };

@@ -4,7 +4,7 @@ import LoginScreen from './LoginScreen';
 import Nav from './nav/Nav';
 import { Route } from 'react-router-dom';
 import CalendarsList from './calendar/CalendarsList';
-import CurrentCalendar from './calendar/CurrentCalendar';
+import CalendarView from './calendar/CalendarView';
 import styled from 'styled-components';
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
                 <Nav />
             </Header>
             <MainContainer>
-                <Route component={CurrentCalendar} exact path="/" />
+                <Route component={CalendarView} exact path="/" />
                 <Route component={CalendarsList} exact path="/calendars" />
             </MainContainer>
         </AppContainer>

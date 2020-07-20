@@ -3,6 +3,18 @@ import styled from 'styled-components';
 import colors from '../../utils/colors';
 import React, { useState } from 'react';
 
+function MonthView({ date, setCurrentDay }) {
+    const labels = getWeekDaysLabels();
+    const tiles = createTiles(date, setCurrentDay);
+
+    return (
+        <MonthViewContainer>
+            {labels}
+            {tiles}
+        </MonthViewContainer>
+    );
+}
+
 function createTiles(date, setCurrentDay) {
     let numberOfDaysToDisplay = 42;
     let offset = getCurrentMonthOffset(date.year, date.month);
@@ -23,18 +35,6 @@ function createTiles(date, setCurrentDay) {
             />
         );
     });
-}
-
-function MonthView({ date, setCurrentDay }) {
-    const labels = getWeekDaysLabels();
-    const tiles = createTiles(date, setCurrentDay);
-
-    return (
-        <MonthViewContainer>
-            {labels}
-            {tiles}
-        </MonthViewContainer>
-    );
 }
 
 function DayTile({ offsetDay, selected, setCurrentDay, date }) {

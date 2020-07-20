@@ -63,7 +63,6 @@ class GoogleApi extends React.Component {
 
             const auth = await gapi.auth2.init({
                 clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                apiKey: process.env.REACT_APP_GOOGLE_CALENDAR_API_KEY,
                 scope: 'https://www.googleapis.com/auth/calendar',
             });
 
@@ -103,7 +102,6 @@ class GoogleApi extends React.Component {
     logOut = async () => {
         const { auth } = this.state.api;
         await auth.signOut();
-        console.log(auth.isSignedIn.get());
         this.updateSignInStatus(auth.isSignedIn.get());
     };
 
@@ -124,6 +122,23 @@ class GoogleApi extends React.Component {
         return json.items;
     };
 
+    getEvents = async (calendarId, dateMin, dateMax) => {
+        const url = new URL(urls.google.getEvents.replace('calendarId', calendarId));
+        url.search = new URLSearchParams({
+            timeMin: dateMin,
+            timeMax: dateMax
+        })
+        const [tokenType, token] = await this.getToken();
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `${tokenType} ${token}`,
+            },
+        });
+
+        const json = await response.json();
+        return json.items;
+    }
+
     render() {
         const displayChildren = this.state.isScriptLoaded && this.state.animation.executed;
         const children = this.props.children;
@@ -132,6 +147,7 @@ class GoogleApi extends React.Component {
             isSignedIn: this.isSignedIn,
             getCalendarsList: this.getCalendarsList,
             signIn: this.signIn,
+            getEvents: this.getEvents
         };
 
         return (

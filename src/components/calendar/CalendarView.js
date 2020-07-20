@@ -1,10 +1,7 @@
 import React from 'react';
 import MonthView from './MonthView';
-import styled from 'styled-components';
-
-function CurrentCalendar() {
-    return <CalendarView />;
-}
+import DetailsView from "../event/DetailsView";
+import styled from "styled-components";
 
 class CalendarView extends React.Component {
     viewModes = {
@@ -28,7 +25,6 @@ class CalendarView extends React.Component {
             month,
             day,
         };
-        console.log(current);
         this.setState({ current });
     };
 
@@ -38,16 +34,16 @@ class CalendarView extends React.Component {
         return (
             <Container>
                 <MonthView date={current} setCurrentDay={this.setCurrentDay} />
-                <Details />
+                <DetailsView date={current} />
             </Container>
         );
     }
 }
 
-const Container = styled.div``;
-
-const Details = styled.div`
-    height: calc(50vh - 40px);
+const Container = styled.div`
+  & > div:first-child {
+    margin-bottom: 1vmin;
+  }
 `;
 
-export default CurrentCalendar;
+export default CalendarView;

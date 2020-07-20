@@ -7,8 +7,14 @@ const Button = styled.button`
 `;
 
 function PrimaryButton({ children, onClick}) {
+    return (
+        <StyledPrimaryButton onClick={onClick}>
+            <div>{children}</div>
+        </StyledPrimaryButton>
+    );
+}
 
-    const PrimaryButton = styled(Button)`
+const StyledPrimaryButton = styled(Button)`
         background: transparent;
         border-radius: 5px;
         border: 0.5vmin solid transparent;
@@ -33,23 +39,4 @@ function PrimaryButton({ children, onClick}) {
         }
     `;
 
-    return (
-        <PrimaryButton onClick={onClick}>
-            <div>{children}</div>
-        </PrimaryButton>
-    );
-}
-
-function LogoutButton({ children, onClick }) {
-    const LogoutButton = styled(Button)`
-
-    `;
-
-    return (
-        <LogoutButton onClick={onClick}>
-            <div>{children}</div>
-        </LogoutButton>
-    );
-}
-
-export { PrimaryButton, LogoutButton };
+export { PrimaryButton };
