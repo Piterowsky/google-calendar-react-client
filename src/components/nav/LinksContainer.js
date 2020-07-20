@@ -3,6 +3,7 @@ import NavLink from './NavLink';
 import { PrimaryButton } from '../uni/Buttons';
 import React, { useContext } from 'react';
 import { GoogleApiContext } from '../GoogleApi';
+import colors from '../../utils/colors';
 
 const Container = styled.div`
     margin-left: auto;
@@ -19,7 +20,14 @@ function LinksContainer() {
             <NavLink to="/calendars">Calendars</NavLink>
             <NavLink to="/some">Some</NavLink>
             <NavLink to="/links">Links</NavLink>
-            <PrimaryButton onClick={context.logOut}>Logout</PrimaryButton>
+            <PrimaryButton
+                onClick={context.logOut}
+                bgColor={colors.white}
+                textColor={colors.primaryLight}
+                borderColor={colors.white}
+            >
+                Logout
+            </PrimaryButton>
         </Container>
     );
 }

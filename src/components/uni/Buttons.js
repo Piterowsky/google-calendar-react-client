@@ -6,9 +6,9 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-function PrimaryButton({ children, onClick }) {
+function PrimaryButton({ children, onClick, bgColor, borderColor, textColor }) {
     return (
-        <StyledPrimaryButton onClick={onClick}>
+        <StyledPrimaryButton onClick={onClick} bgColor={bgColor} borderColor={borderColor} textColor={textColor}>
             <div>{children}</div>
         </StyledPrimaryButton>
     );
@@ -18,24 +18,25 @@ const StyledPrimaryButton = styled(Button)`
     background: transparent;
     border-radius: 5px;
     border: 0.5vmin solid transparent;
-    color: white;
+    color: ${({ textColor }) => textColor || colors.white};
     font-weight: bold;
     padding: 0.5vmin;
     transition: border 0.6s;
 
     & > div {
+        border-radius: 2px;
         padding: 1.5vmin 3.5vmin;
         height: 100%;
         width: 100%;
-        background: ${colors.primaryLight};
+        background: ${({ bgColor }) => bgColor || colors.primaryLight};
     }
 
     &:active {
-        background: ${colors.primaryLight};
+        background: ${({ bgColor }) => bgColor || colors.primaryLight};
     }
 
     &:hover {
-        border-color: ${colors.primaryIntensive};
+        border-color: ${({ borderColor }) => borderColor || colors.primaryIntensive};
     }
 `;
 
