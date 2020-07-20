@@ -17,9 +17,8 @@ function LinksContainer() {
     const context = useContext(GoogleApiContext);
     return (
         <Container>
+            <NavLink to="/">Calendar</NavLink>
             <NavLink to="/calendars">Calendars</NavLink>
-            <NavLink to="/some">Some</NavLink>
-            <NavLink to="/links">Links</NavLink>
             <PrimaryButton
                 onClick={context.logOut}
                 bgColor={colors.white}

@@ -38,6 +38,8 @@ class CalendarView extends React.Component {
                 <MonthView date={current} setCurrentDay={this.setCurrentDay} />
                 <DetailsView date={current} />
                 <TodayButton setCurrentDay={this.setCurrentDay} />
+                <TodayButton />
+                <AddEventButton />
             </Container>
         );
     }
@@ -47,20 +49,29 @@ function TodayButton({ setCurrentDay }) {
     const today = new Date();
     const handleClick = () => setCurrentDay(today.getFullYear(), today.getMonth(), today.getDate());
     return (
-        <StyledTodayButton onClick={handleClick}>
+        <StyledRoundedButton onClick={handleClick} bottom="1vmin" right="1vmin">
             <div>Today</div>
-        </StyledTodayButton>
+        </StyledRoundedButton>
     );
 }
 
-const StyledTodayButton = styled.button`
+function AddEventButton() {
+    const handleClick = () => console.log('Adding event');
+    return (
+        <StyledRoundedButton onClick={handleClick} bottom="1vmin" right="18vmin">
+            <div>+</div>
+        </StyledRoundedButton>
+    );
+}
+
+const StyledRoundedButton = styled.button`
     border-radius: 50%;
     background: transparent;
     position: absolute;
-    height: 50px;
-    width: 50px;
-    bottom: 1vmin;
-    right: 1vmin;
+    height: 15vmin;
+    width: 15vmin;
+    bottom: ${({bottom}) => bottom};
+    right: ${({right}) => right};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,7 +80,7 @@ const StyledTodayButton = styled.button`
     cursor: pointer;
 
     &:hover {
-      border: 1vmin solid ${colors.primaryLight};
+        border: 1vmin solid ${colors.primaryLight};
     }
 
     & > div {
