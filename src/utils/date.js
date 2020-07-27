@@ -16,9 +16,9 @@ function formatDate(date) {
         return value.toString().length < 2 ? '0' + value : value;
     }
 
-    return `${addLeadingZero(date.getDate())}-${addLeadingZero(
-        date.getMonth()
-    )}-${date.getFullYear()} ${addLeadingZero(date.getHours())}:${addLeadingZero(date.getMinutes())}`;
+    return `${addLeadingZero(date.getDate())}-${addLeadingZero(date.getMonth())}-${date.getFullYear()} ${addLeadingZero(
+        date.getHours()
+    )}:${addLeadingZero(date.getMinutes())}`;
 }
 
 // TODO: Temporary mock, replace while working with i18n

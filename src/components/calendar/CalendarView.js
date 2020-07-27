@@ -3,7 +3,6 @@ import MonthView from './MonthView';
 import DetailsView from '../event/DetailsView';
 import styled from 'styled-components';
 import colors from '../../utils/colors';
-import { RoundedButton } from '../uni/Buttons';
 
 class CalendarView extends React.Component {
     viewModes = {
@@ -70,8 +69,8 @@ const StyledRoundedButton = styled.button`
     position: absolute;
     height: 15vmin;
     width: 15vmin;
-    bottom: ${({bottom}) => bottom};
-    right: ${({right}) => right};
+    bottom: ${({ bottom }) => bottom};
+    right: ${({ right }) => right};
     display: flex;
     justify-content: center;
     align-items: center;

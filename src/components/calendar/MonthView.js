@@ -1,7 +1,7 @@
 import { getCurrentMonthOffset, getDaysOfTheWeekLocalized } from '../../utils/date';
 import styled from 'styled-components';
 import React from 'react';
-import DayTile from "./DayTile";
+import DayTile from './DayTile';
 
 function MonthView({ date, setCurrentDay }) {
     const labels = getWeekDaysLabels();
@@ -19,7 +19,7 @@ function createTiles(date, setCurrentDay) {
     let numberOfDaysToDisplay = 42;
     let offset = getCurrentMonthOffset(date.year, date.month);
 
-    const daysNumbers = [ ...Array(numberOfDaysToDisplay).keys() ];
+    const daysNumbers = [...Array(numberOfDaysToDisplay).keys()];
     return daysNumbers.map((index) => {
         const tileDate = new Date(date.year, date.month, 1 - offset + index);
         const isSelected = date.month === tileDate.getMonth() && date.day === tileDate.getDate();
@@ -27,11 +27,11 @@ function createTiles(date, setCurrentDay) {
 
         return (
             <DayTile
-                key={ Math.random() }
-                date={ tileDate }
-                selected={ isSelected }
-                offsetDay={ isNotCurrentMonth }
-                setCurrentDay={ setCurrentDay }
+                key={Math.random()}
+                date={tileDate}
+                selected={isSelected}
+                offsetDay={isNotCurrentMonth}
+                setCurrentDay={setCurrentDay}
             />
         );
     });

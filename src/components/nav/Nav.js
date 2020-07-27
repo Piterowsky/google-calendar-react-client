@@ -18,7 +18,7 @@ function Nav() {
     return (
         <StyledNav>
             <LogoContainer to="/" />
-            <LinksContainer/>
+            <LinksContainer />
         </StyledNav>
     );
 }

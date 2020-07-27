@@ -4,12 +4,6 @@ import styled from 'styled-components';
 import LoadingComponent from '../LoadingComponent';
 import Event from './EventTile';
 
-function addScrollActionToContainer(container) {
-    if (container) {
-        container.addEventListener('scroll', (e) => console.log('ELO MORDA'));
-    }
-}
-
 function DetailsView({ date }) {
     const [events, setEvents] = useState();
     const [isLoading, setIsLoading] = useState(true);
@@ -17,13 +11,10 @@ function DetailsView({ date }) {
 
     useEffect(() => getEventsOfCurrentDay(context, date, setEvents, setIsLoading), [date, context]);
 
-    const eventsContainer = useRef();
-    useEffect(() => addScrollActionToContainer(eventsContainer.current), [eventsContainer.current]);
-
     const eventsTiles = createEvents(events);
 
     return (
-        <StyledEventsContainer id="eventsContainer" ref={eventsContainer}>
+        <StyledEventsContainer id="eventsContainer">
             {isLoading ? <LoadingComponent /> : <div id="events">{eventsTiles}</div>}
         </StyledEventsContainer>
     );

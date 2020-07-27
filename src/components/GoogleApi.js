@@ -126,8 +126,8 @@ class GoogleApi extends React.Component {
         const url = new URL(urls.google.getEvents.replace('calendarId', calendarId));
         url.search = new URLSearchParams({
             timeMin: dateMin,
-            timeMax: dateMax
-        })
+            timeMax: dateMax,
+        });
         const [tokenType, token] = await this.getToken();
         const response = await fetch(url, {
             headers: {
@@ -137,7 +137,7 @@ class GoogleApi extends React.Component {
 
         const json = await response.json();
         return json.items;
-    }
+    };
 
     render() {
         const displayChildren = this.state.isScriptLoaded && this.state.animation.executed;
@@ -147,7 +147,7 @@ class GoogleApi extends React.Component {
             signIn: this.signIn,
             isSignedIn: this.isSignedIn,
             getCalendarsList: this.getCalendarsList,
-            getEvents: this.getEvents
+            getEvents: this.getEvents,
         };
 
         return (

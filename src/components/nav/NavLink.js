@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { NavLink as RouterNavLink } from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink as RouterNavLink } from 'react-router-dom';
 
 const NavLink = styled(RouterNavLink)`
     text-decoration: none;
@@ -10,16 +10,16 @@ const NavLink = styled(RouterNavLink)`
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color .4s, border-bottom .1s;
+    transition: background-color 0.4s, border-bottom 0.1s;
     padding: 0 1.2rem;
 
     &:hover {
         background: rgba(0, 0, 0, 0.25);
-        border-bottom: 5px solid #fff
+        border-bottom: 5px solid #fff;
     }
 
     &.active {
-        border-bottom: 5px solid #fff
+        border-bottom: 5px solid #fff;
     }
 `;
 
