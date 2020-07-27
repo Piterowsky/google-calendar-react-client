@@ -1,17 +1,22 @@
-import { getCurrentMonthOffset, getDaysOfTheWeekLocalized } from '../../utils/date';
+import { getCurrentMonthOffset, getDaysOfTheWeekLocalized, formatDate } from '../../utils/date';
 import styled from 'styled-components';
 import React from 'react';
 import DayTile from './DayTile';
+import colors from '../../utils/colors';
 
 function MonthView({ date, setCurrentDay }) {
     const labels = getWeekDaysLabels();
     const tiles = createTiles(date, setCurrentDay);
+    const currentDateLabel = formatDate(new Date(date.year, date.month, date.day), false);
 
     return (
-        <MonthViewContainer>
-            {labels}
-            {tiles}
-        </MonthViewContainer>
+        <>
+            <CurrentDateLabel>{currentDateLabel}</CurrentDateLabel>
+            <MonthViewContainer>
+                {labels}
+                {tiles}
+            </MonthViewContainer>
+        </>
     );
 }
 
@@ -50,13 +55,22 @@ const MonthViewContainer = styled.div`
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 1fr repeat(6, 5fr);
     grid-gap: 0.5vmin;
-    height: calc(50vh - 40px);
+    height: calc(48vh - 40px);
 `;
 
 const WeekDayLabel = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+const CurrentDateLabel = styled.div`
+    font-family: 'Quicksand', sans-serif;
+    font-size: 3rem;
+    height: 4vh;
+    display: block;
+    color: ${colors.primaryIntensive};
+    text-align: center;
 `;
 
 export default MonthView;

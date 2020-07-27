@@ -15,7 +15,7 @@ function DetailsView({ date }) {
 
     return (
         <StyledEventsContainer id="eventsContainer">
-            {isLoading ? <LoadingComponent /> : <div id="events">{eventsTiles}</div>}
+            {isLoading ? <LoadingComponent /> : <Events>{eventsTiles}</Events>}
         </StyledEventsContainer>
     );
 }
@@ -60,9 +60,13 @@ function createEvents(events) {
     return events ? events.map((event) => <Event key={Math.random()} event={event} />) : [];
 }
 
+const Events = styled.div`
+    padding-bottom: 100px;
+`;
+
 const StyledEventsContainer = styled.div`
-    height: calc(50vh - 40px);
-    max-height: calc(50vh - 40px);
+    height: calc(48vh - 40px);
+    max-height: calc(48vh - 40px);
     overflow-y: scroll;
     position: relative;
     scrollbar-width: none;

@@ -21,11 +21,6 @@ class CalendarView extends React.Component {
         },
     };
 
-    getCurrentDate = () => {
-        const { year, month, day } = this.state.current;
-        return new Date(year, month, day);
-    };
-
     setCurrentDay = (year, month, day) => {
         const current = {
             year,
@@ -38,11 +33,8 @@ class CalendarView extends React.Component {
     render() {
         const current = this.state.current;
 
-        const currentDateLabel = formatDate(this.getCurrentDate(), false);
-
         return (
             <Container>
-                <CurrentDateLabel>{currentDateLabel}</CurrentDateLabel>
                 <MonthView date={current} setCurrentDay={this.setCurrentDay} />
                 <DetailsView date={current} />
                 <TodayButton setCurrentDay={this.setCurrentDay} />
@@ -100,13 +92,6 @@ const StyledRoundedButton = styled.button`
         justify-content: center;
         align-items: center;
     }
-`;
-
-const CurrentDateLabel = styled.div`
-    font-family: 'Quicksand', sans-serif;
-    font-size: 3rem;
-    color: ${colors.primaryIntensive};
-    text-align: center;
 `;
 
 const Container = styled.div`
