@@ -11,14 +11,13 @@ function parseDate(string) {
     return millis ? new Date(millis) : null;
 }
 
-function formatDate(date) {
-    function addLeadingZero(value) {
-        return value.toString().length < 2 ? '0' + value : value;
-    }
+function addLeadingZero(value) {
+    return value.toString().length < 2 ? '0' + value : value;
+}
 
-    return `${addLeadingZero(date.getDate())}-${addLeadingZero(date.getMonth())}-${date.getFullYear()} ${addLeadingZero(
-        date.getHours()
-    )}:${addLeadingZero(date.getMinutes())}`;
+function formatDate(date, withTime = true) {
+    const formatted = `${addLeadingZero(date.getDate())}-${addLeadingZero(date.getMonth())}-${date.getFullYear()}`;
+    return withTime ? formatted + `${addLeadingZero(date.getHours())}:${addLeadingZero(date.getMinutes())}` : formatted;
 }
 
 // TODO: Temporary mock, replace while working with i18n

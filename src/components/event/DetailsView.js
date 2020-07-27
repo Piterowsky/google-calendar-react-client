@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GoogleApiContext } from '../GoogleApi';
 import styled from 'styled-components';
 import LoadingComponent from '../LoadingComponent';
