@@ -123,7 +123,7 @@ class GoogleApi extends React.Component {
     };
 
     getEvents = async (calendarId, dateMin, dateMax) => {
-        const url = new URL(urls.google.getEvents.replace('${calendarId}', calendarId));
+        const url = new URL(urls.google.getEvents.replace('#{calendarId}', calendarId));
         url.search = new URLSearchParams({
             timeMin: dateMin,
             timeMax: dateMax,
