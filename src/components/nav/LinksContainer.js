@@ -9,8 +9,7 @@ const Container = styled.div`
     margin-left: auto;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    align-items: stretch;
 `;
 
 function LinksContainer() {
