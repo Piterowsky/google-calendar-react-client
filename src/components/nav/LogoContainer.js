@@ -20,8 +20,6 @@ const Container = styled(Link)`
     & > .logo-img {
         width: 5vmin;
         max-width: 50px;
-        height: 5vmin;
-        max-height: 50px;
         transition: transform 0.8s;
     }
 

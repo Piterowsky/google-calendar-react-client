@@ -25,15 +25,17 @@ function App() {
 }
 
 const Header = styled.header`
-    margin-bottom: 1.5vh;
+    margin-bottom: 1%;
+    height: 5%;
 `;
 
 const MainContainer = styled.main`
-    padding: 0 1rem;
+    padding: 0 2%;
 `;
 
 const AppContainer = styled.div`
     overflow: hidden;
+    height: 100vh;
 `;
 
 export default App;

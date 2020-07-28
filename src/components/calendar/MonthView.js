@@ -1,4 +1,4 @@
-import { getCurrentMonthOffset, getDaysOfTheWeekLocalized, formatDate } from '../../utils/date';
+import { getMonthOffset, getLocalizedDaysOfTheWeek, formatDate } from '../../utils/date';
 import styled from 'styled-components';
 import React from 'react';
 import DayTile from './DayTile';
@@ -6,12 +6,12 @@ import colors from '../../utils/colors';
 
 function MonthView({ date, setCurrentDay }) {
     const labels = getWeekDaysLabels();
-    const tiles = createTiles(date, setCurrentDay);
-    const currentDateLabel = formatDate(new Date(date.year, date.month, date.day), false);
+    const tiles = createMonthDayTiles(date, setCurrentDay);
+    const formattedDate = formatDate(new Date(date.year, date.month, date.day), false);
 
     return (
         <>
-            <CurrentDateLabel>{currentDateLabel}</CurrentDateLabel>
+            <CurrentDateLabel>{formattedDate}</CurrentDateLabel>
             <MonthViewContainer>
                 {labels}
                 {tiles}
@@ -20,9 +20,9 @@ function MonthView({ date, setCurrentDay }) {
     );
 }
 
-function createTiles(date, setCurrentDay) {
+function createMonthDayTiles(date, setCurrentDay) {
     let numberOfDaysToDisplay = 42;
-    let offset = getCurrentMonthOffset(date.year, date.month);
+    let offset = getMonthOffset(date.year, date.month);
 
     const daysNumbers = [...Array(numberOfDaysToDisplay).keys()];
     return daysNumbers.map((index) => {
@@ -43,7 +43,7 @@ function createTiles(date, setCurrentDay) {
 }
 
 function getWeekDaysLabels() {
-    return getDaysOfTheWeekLocalized().map((day) => (
+    return getLocalizedDaysOfTheWeek().map((day) => (
         <WeekDayLabel key={day}>
             <span>{day}</span>
         </WeekDayLabel>
