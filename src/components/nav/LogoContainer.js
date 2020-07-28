@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import logo from '../../assets/logo.svg';
 
 const Container = styled(Link)`
     margin-left: 0;
@@ -35,7 +36,7 @@ const Container = styled(Link)`
 function LogoContainer({ to }) {
     return (
         <Container to={to}>
-            <img className="logo-img" alt="logo" src={window.location.origin + '/logo.svg'} />
+            <img className="logo-img" alt="logo" src={logo} />
             <span className="logo-text">Calendar Web Client</span>
         </Container>
     );
