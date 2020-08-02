@@ -23,6 +23,8 @@ const LinkStyles = () => `
     }
     
     @media (${tablet}) {
+        padding: 1rem 1.2rem;
+        
         &.active {
             border-bottom: 5px solid #fff;
         }

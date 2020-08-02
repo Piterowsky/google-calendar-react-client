@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import CalendarsList from './calendar/CalendarsList';
 import CalendarView from './calendar/CalendarView';
 import styled from 'styled-components';
+import {tablet} from "../utils/media";
 
 function App() {
     const context = useContext(GoogleApiContext);
@@ -27,11 +28,19 @@ function App() {
 const Header = styled.header`
     margin-bottom: 1%;
     height: 5%;
+
+    @media (${tablet}) {
+        height: 8%;
+    }
 `;
 
 const MainContainer = styled.main`
     padding: 0 2%;
-    height: 100vh;
+    height: 95%;
+    
+    @media (${tablet}) {
+        height: 92%;
+    }
 `;
 
 const AppContainer = styled.div`

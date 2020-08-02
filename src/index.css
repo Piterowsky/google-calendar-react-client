@@ -8,6 +8,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+*::-moz-focus-inner {
+    border: 0;
+}
+
 html,
 head,
 body {
@@ -16,7 +20,7 @@ body {
 }
 
 :root {
-    font-size: calc(2vmin + 0.1rem);
+    font-size: calc(0.5vw + 0.5rem);
 }
 
 button {

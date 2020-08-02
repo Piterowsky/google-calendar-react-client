@@ -4,9 +4,10 @@ import colors from '../../utils/colors';
 import LinksContainer from './LinksContainer';
 import LogoContainer from './LogoContainer';
 import BurgerButton from './BurgerButton';
+import size from '../../utils/media';
 
 const StyledNav = styled.nav`
-    min-height: 100%;
+    height: 100%;
     background: ${colors.primary};
     display: flex;
     justify-content: space-between;
@@ -17,12 +18,13 @@ const StyledNav = styled.nav`
 `;
 
 function Nav() {
-    const [isOpen, setIsOpen] = useState(false);
+    const mobileNav = window.screen.width < size.tablet;
+    const [isOpen, setIsOpen] = useState(!mobileNav);
     return (
         <StyledNav>
             <LogoContainer to="/" />
-            <LinksContainer setIsOpen={setIsOpen} isOpen={isOpen} />
-            <BurgerButton setIsOpen={setIsOpen} isOpen={isOpen} />
+            <LinksContainer setIsOpen={setIsOpen} isOpen={mobileNav ? isOpen : true} />
+            <BurgerButton id="burgerButton" setIsOpen={setIsOpen} isOpen={isOpen} />
         </StyledNav>
     );
 }

@@ -1,13 +1,14 @@
 const size = {
-    mobile: '320px',
-    tablet: '768px',
-    laptop: '1024px',
-    desktop: '1440px',
+    mobile: '320',
+    tablet: '768',
+    laptop: '1024',
+    desktop: '1440',
 };
 
-const mobile = `(min-width: ${size.mobile})`;
-const tablet = `(min-width: ${size.tablet})`;
-const laptop = `(min-width: ${size.laptop})`;
-const desktop = `(min-width: ${size.desktop})`;
+const mobile = `(min-width: ${size.mobile}px)`;
+const tablet = `(min-width: ${size.tablet}px)`;
+const laptop = `(min-width: ${size.laptop}px)`;
+const desktop = `(min-width: ${size.desktop}px)`;
 
+export default size;
 export { mobile, tablet, laptop, desktop };

@@ -22,7 +22,7 @@ function DetailsView({ date }) {
 
 function getEventDates(date) {
     const dateMin = new Date(date.year, date.month, date.day).toISOString();
-    const dateMax = new Date(date.year, date.month, date.day + 1).toISOString();
+    const dateMax = new Date(date.year, date.month, Number(date.day) + 1).toISOString();
     return { dateMin, dateMax };
 }
 
@@ -65,8 +65,6 @@ const Events = styled.div`
 `;
 
 const StyledEventsContainer = styled.div`
-    height: calc(48vh - 40px);
-    max-height: calc(48vh - 40px);
     overflow-y: scroll;
     position: relative;
     scrollbar-width: none;

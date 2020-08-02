@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { parseDate, formatDate } from '../../utils/date';
 import colors from '../../utils/colors';
+import { tablet } from '../../utils/media';
 
 function Event({ event }) {
     const { summary, color } = event;
@@ -56,11 +57,18 @@ const Properties = styled.div`
         margin-left: 1vmin;
         font-size: 3rem;
     }
+
+    @media (${tablet}) {
+        & > .summary {
+            font-size: 2rem;
+        }
+        
+        min-height: 12vh;
+    }
 `;
 
 const ColorBar = styled.div`
     width: 2vw;
-    min-height: 10vh;
     background: ${({ color }) => color};
     border-radius: 10px 0 0 10px;
 `;
@@ -69,10 +77,10 @@ const StyledEvent = styled.div`
     background: ${colors.lightgray};
     box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.25);
     margin-top: 2.5vmin;
-    min-height: 10vh;
     color: black;
     display: flex;
     border-radius: 10px 0 0 10px;
+    height: 10%;
 
     &:first-child {
         margin: 0;

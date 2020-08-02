@@ -1,5 +1,6 @@
 export default {
-    lightblue: 'rgba(22,152,239,0.83)',
+    lightblue: 'rgba(94,167,246,0.83)',
+    blue: 'rgba(22,152,239,0.83)',
     darkblue: '#1b4793',
     aquamarine: '#7fffd4',
     yellow: '#fac92c',

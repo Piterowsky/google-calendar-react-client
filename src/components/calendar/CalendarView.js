@@ -4,6 +4,7 @@ import DetailsView from '../event/DetailsView';
 import styled from 'styled-components';
 import TodayButton from './buttons/TodayButton';
 import AddEventButton from './buttons/AddEventButton';
+import { tablet } from '../../utils/media';
 
 class CalendarView extends React.Component {
     state = {
@@ -31,8 +32,16 @@ class CalendarView extends React.Component {
 }
 
 const Container = styled.div`
+    height: 100%;
+
     & > div:first-child {
         margin-bottom: 1vmin;
+    }
+
+    @media (${tablet}) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 5%;
     }
 `;
 

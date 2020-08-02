@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {desktop} from "../../utils/media";
 
 const Button = styled.button`
     border: none;
@@ -8,6 +9,10 @@ const Button = styled.button`
     font-size: 10px;
     width: 3em;
     height: 2.5em;
+    
+    @media (${desktop}) {
+        display: none;
+    }
 `;
 
 const Bar = styled.div`

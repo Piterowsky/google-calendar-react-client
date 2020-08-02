@@ -19,8 +19,9 @@ const StyledDayTile = styled.div`
     position: relative;
     padding: 0;
     background: ${({ offsetDay }) => (offsetDay ? colors.primaryIntensive : colors.primary)};
-    border: ${({ selected }) => (selected ? `1vmin solid ${colors.lightblue}` : 'none')};
+    border: ${({ selected }) => (selected ? `1vmin solid ${colors.blue}` : 'none')};
     cursor: pointer;
+    transition: border .25s;
 
     & > .day {
         font-size: 2rem;
@@ -32,6 +33,10 @@ const StyledDayTile = styled.div`
         color: ${({ offsetDay }) => (offsetDay ? colors.lightgray : colors.white)};
         transform: translate(-50%, -50%);
         user-select: none;
+    }
+
+    &:hover {
+      border: 1vmin solid ${colors.lightblue}
     }
 `;
 

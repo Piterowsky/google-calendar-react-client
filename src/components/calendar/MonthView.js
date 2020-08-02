@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import React from 'react';
 import DayTile from './DayTile';
 import colors from '../../utils/colors';
+import { tablet } from '../../utils/media';
 
 function MonthView({ date, setCurrentDay }) {
     const labels = getWeekDaysLabels();
@@ -10,13 +11,11 @@ function MonthView({ date, setCurrentDay }) {
     const formattedDate = formatDate(new Date(date.year, date.month, date.day), false);
 
     return (
-        <div>
+        <MonthViewContainer>
             <CurrentDateLabel>{formattedDate}</CurrentDateLabel>
-            <MonthViewContainer>
-                {labels}
-                {tiles}
-            </MonthViewContainer>
-        </div>
+            {labels}
+            {tiles}
+        </MonthViewContainer>
     );
 }
 
@@ -53,9 +52,15 @@ function getWeekDaysLabels() {
 const MonthViewContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 1fr repeat(6, 5fr);
+    grid-template-rows: 1fr 1fr repeat(6, 2fr);
     grid-gap: 0.5vmin;
-    height: calc(48vh - 40px);
+    height: 45%;
+    max-height: 45%;
+
+    @media (${tablet}) {
+        height: 80%;
+        max-height: 80%;
+    }
 `;
 
 const WeekDayLabel = styled.div`
@@ -67,10 +72,10 @@ const WeekDayLabel = styled.div`
 const CurrentDateLabel = styled.div`
     font-family: 'Quicksand', sans-serif;
     font-size: 3rem;
-    height: 4vh;
     display: block;
     color: ${colors.primaryIntensive};
     text-align: center;
+    grid-column: span 7;
 `;
 
 export default MonthView;

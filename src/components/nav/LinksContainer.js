@@ -16,16 +16,20 @@ const Container = styled.div`
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
 
     @media (${tablet}) {
-        margin-left: auto;
         height: 100%;
+        width: auto;
+        position: static;
+        box-shadow: none;
+        flex-direction: row;
+        margin-left: auto;
         display: flex;
         align-items: stretch;
+        justify-content: flex-end;
     }
 `;
 
 function LinksContainer({ isOpen, setIsOpen }) {
     const context = useContext(GoogleApiContext);
-
     return (
         <>
             {isOpen && (
