@@ -1,32 +1,47 @@
 import styled from 'styled-components';
-import NavLink from './NavLink';
-import { PrimaryButton } from '../uni/Buttons';
+import { NavLink, Link } from './Link';
 import React, { useContext } from 'react';
 import { GoogleApiContext } from '../GoogleApi';
+import { tablet } from '../../utils/media';
 import colors from '../../utils/colors';
 
 const Container = styled.div`
-    margin-left: auto;
-    height: 100%;
-    display: flex;
-    align-items: stretch;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    z-index: 100;
+    background: ${colors.primary};
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
+
+    @media (${tablet}) {
+        margin-left: auto;
+        height: 100%;
+        display: flex;
+        align-items: stretch;
+    }
 `;
 
-function LinksContainer() {
+function LinksContainer({ isOpen, setIsOpen }) {
     const context = useContext(GoogleApiContext);
+
     return (
-        <Container>
-            <NavLink to="/">Calendar</NavLink>
-            <NavLink to="/calendars">Calendars</NavLink>
-            <PrimaryButton
-                onClick={context.logOut}
-                bgColor={colors.white}
-                textColor={colors.primaryLight}
-                borderColor={colors.white}
-            >
-                Logout
-            </PrimaryButton>
-        </Container>
+        <>
+            {isOpen && (
+                <Container>
+                    <NavLink to="/" onClick={() => setIsOpen(false)}>
+                        Calendar
+                    </NavLink>
+                    <NavLink to="/calendars" onClick={() => setIsOpen(false)}>
+                        Calendars
+                    </NavLink>
+                    <Link to="/" onClick={context.logOut}>
+                        Logout
+                    </Link>
+                </Container>
+            )}
+        </>
     );
 }
 

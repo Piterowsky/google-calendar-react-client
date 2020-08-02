@@ -9,8 +9,8 @@ describe('date utils', () => {
     });
 
     test('getDaysOfTheWeekLocalized - language en', () => {
-        const languageGetter = jest.spyOn(window.navigator, 'language', 'get')
-        languageGetter.mockReturnValue('en')
+        const languageGetter = jest.spyOn(window.navigator, 'language', 'get');
+        languageGetter.mockReturnValue('en');
 
         expect(getLocalizedDaysOfTheWeek()).toEqual([
             'Monday',
@@ -24,8 +24,8 @@ describe('date utils', () => {
     });
 
     test('getDaysOfTheWeekLocalized - language pl', () => {
-        const languageGetter = jest.spyOn(window.navigator, 'language', 'get')
-        languageGetter.mockReturnValue('pl')
+        const languageGetter = jest.spyOn(window.navigator, 'language', 'get');
+        languageGetter.mockReturnValue('pl');
 
         expect(getLocalizedDaysOfTheWeek()).toEqual([
             'poniedziałek',

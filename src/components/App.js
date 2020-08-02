@@ -31,6 +31,7 @@ const Header = styled.header`
 
 const MainContainer = styled.main`
     padding: 0 2%;
+    height: 100vh;
 `;
 
 const AppContainer = styled.div`

@@ -2,7 +2,7 @@
  * Get length of the month
  * @param {number} year
  * @param {number} month
- * @returns {number} number of 
+ * @returns {number} number of
  */
 function getMonthLength(year, month) {
     return new Date(year, month + 1, 0).getDate();
@@ -17,7 +17,7 @@ function getMonthLength(year, month) {
  */
 function getMonthOffset(year, month) {
     const firstDayIndex = new Date(year, month, 1).getDay();
-    return firstDayIndex !== 0 ? firstDayIndex - 1  : 6;
+    return firstDayIndex !== 0 ? firstDayIndex - 1 : 6;
 }
 
 /**
@@ -67,11 +67,4 @@ function getLocalizedDaysOfTheWeek() {
     );
 }
 
-export {
-    getMonthLength,
-    getLocalizedDaysOfTheWeek,
-    getMonthOffset,
-    parseDate,
-    formatDate,
-    formatDateWithTime,
-};
+export { getMonthLength, getLocalizedDaysOfTheWeek, getMonthOffset, parseDate, formatDate, formatDateWithTime };
