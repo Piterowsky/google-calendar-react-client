@@ -112,14 +112,11 @@ class GoogleApi extends React.Component {
     }
 
     getCalendarsList = async () => {
-        const [tokenType, token] = await this.getToken();
-        const response = await fetch(urls.google.getCalendars, {
-            headers: {
-                Authorization: `${tokenType} ${token}`,
-            },
-        });
-        const json = await response.json();
-        return json.items;
+        const result = await this.makeRequest(urls.google.getCalendars);
+        if(!result) {
+            return [];
+        }
+        return result;
     };
 
     getEvents = async (calendarId, dateMin, dateMax) => {
@@ -128,16 +125,27 @@ class GoogleApi extends React.Component {
             timeMin: dateMin,
             timeMax: dateMax,
         });
+        const result = await this.makeRequest(url);
+        if(!result) {
+            return [];
+        }
+        return result;
+    };
+
+    makeRequest = async (url) => {
         const [tokenType, token] = await this.getToken();
         const response = await fetch(url, {
             headers: {
                 Authorization: `${tokenType} ${token}`,
             },
         });
-
-        const json = await response.json();
-        return json.items;
-    };
+        if(response.ok) {
+            const json = await response.json();
+            return json.items;
+        } else {
+            return null;
+        }
+    }
 
     render() {
         const displayChildren = this.state.isScriptLoaded && this.state.animation.executed;

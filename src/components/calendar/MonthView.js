@@ -10,13 +10,13 @@ function MonthView({ date, setCurrentDay }) {
     const formattedDate = formatDate(new Date(date.year, date.month, date.day), false);
 
     return (
-        <>
+        <div>
             <CurrentDateLabel>{formattedDate}</CurrentDateLabel>
             <MonthViewContainer>
                 {labels}
                 {tiles}
             </MonthViewContainer>
-        </>
+        </div>
     );
 }
 

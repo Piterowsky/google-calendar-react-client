@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { parseDate, formatDate } from '../../utils/date';
+import colors from '../../utils/colors';
 
 function Event({ event }) {
     const { summary, color } = event;
@@ -13,12 +14,12 @@ function Event({ event }) {
             <Properties>
                 <span className="summary">{summary ? summary : 'No title'}</span>
                 <div className="labels">
-                    <span>Start: </span>
-                    <span>End: </span>
+                    {startDate && <span>Start: </span>}
+                    {endDate && <span>End: </span>}
                 </div>
                 <div className="dates">
-                    <span className="date">{startDate ? formatDate(startDate) : 'N/A'}</span>
-                    <span className="date">{endDate ? formatDate(endDate) : 'N/A'}</span>
+                    <span className="date">{startDate && formatDate(startDate)}</span>
+                    <span className="date">{endDate && formatDate(endDate)}</span>
                 </div>
             </Properties>
         </StyledEvent>
@@ -65,7 +66,7 @@ const ColorBar = styled.div`
 `;
 
 const StyledEvent = styled.div`
-    background: #eeeeee;
+    background: ${colors.lightgray};
     box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.25);
     margin-top: 2.5vmin;
     min-height: 10vh;

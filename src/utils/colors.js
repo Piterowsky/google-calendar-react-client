@@ -6,7 +6,7 @@ export default {
     primaryLight: '#ea6857',
     primary: '#f15a42',
     primaryIntensive: '#c64833',
-    lightgray: '#CCCCCC',
+    lightgray: '#efefef',
     white: '#FFFFFF',
     darkgray: '#222222',
 };
